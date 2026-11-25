@@ -351,7 +351,17 @@
     "header nav-layout: stacked": {
       "level": 6,
       "baseCandidate": true,
-      "use": "two-row desktop header (≥1200px): logo + actions (search, theme, filled login pill) on row 1, bold primary nav spread full width on row 2; header height via :root:has(meta[name=nav-layout]) so no CLS"
+      "use": "two-row desktop header (≥1200px): logo + actions (search, theme, filled login pill) on row 1, bold primary nav spread full width on row 2; header height via :root:has(meta[name=nav-layout]) so no CLS. Plain nav tool links before the last one become underlined text utility links (e.g. branch finder); below 1200px utility links, login and menu show as icon-over-label buttons"
+    },
+    "header authored tool icons": {
+      "level": 0,
+      "baseCandidate": true,
+      "use": ":pin:, :lock:, :user: etc. inside a nav tool link pick that link's chrome icon (names from ICON_PATHS in header.js)"
+    },
+    "footer footer-layout: columns": {
+      "level": 6,
+      "baseCandidate": true,
+      "use": "section 1: heading+list link columns plus an image paragraph as brand mark (top right); section 2: social list (x, facebook, instagram, linkedin, youtube icons) and a paragraph of linked badge images (app stores); section 3: lighter legal band with legal paragraphs and an image+text regulator badge row"
     }
   },
   "baseContentMarkers": {

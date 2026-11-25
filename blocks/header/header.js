@@ -37,6 +37,10 @@ const ICON_PATHS = {
   youtube: '<rect x="2.5" y="5.5" width="19" height="13" rx="4"/><path d="m10 9.2 5 2.8-5 2.8Z"/>',
   link: '<path d="M7 17 17 7M8 7h9v9"/>',
   bag: '<path d="M5.5 8h13l-1 12.5h-11L5.5 8Z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/>',
+  pin: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.4"/>',
+  lock: '<rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/><path d="M12 15v1.5"/>',
+  x: '<path d="M4.5 4h4.2l10.8 16h-4.2Z"/><path d="M19.5 4 13.6 10.8M4.5 20l5.9-6.8"/>',
+  facebook: '<path d="M14.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4a21 21 0 0 0-2.3-.1c-2.3 0-3.8 1.4-3.8 3.9v2.3H9v3h2.5V21"/>',
   sparkle: '<path d="M12 3.5 13.9 9l5.6 2-5.6 2L12 18.5 10.1 13l-5.6-2 5.6-2Z"/><path d="M18.5 3v3M17 4.5h3"/>',
 };
 
@@ -50,6 +54,17 @@ export const LOGO_MARK = '<svg class="header-logo" viewBox="0 0 32 32" aria-hidd
  */
 export function icon(name, cls = '') {
   return `<svg class="chrome-icon chrome-icon-${name} ${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICON_PATHS[name] || ICON_PATHS.link}</svg>`;
+}
+
+/**
+ * Name of an authored `:icon:` inside an element when it is one of the inline chrome icons.
+ * @param {Element} el
+ * @returns {string}
+ */
+function authoredIcon(el) {
+  const cls = [...(el.querySelector('.icon')?.classList || [])].find((c) => c.startsWith('icon-'));
+  const name = cls ? cls.slice(5) : '';
+  return ICON_PATHS[name] ? name : '';
 }
 
 /**
@@ -406,6 +421,7 @@ export default async function decorate(block) {
   const ctas = [];
   let signIn = null;
   let searchLink = null;
+  const plainLinks = [];
   const authLinks = [];
   toolsSec?.querySelectorAll('a').forEach((a) => {
     if (a.closest('ul')) return;
@@ -453,11 +469,30 @@ export default async function decorate(block) {
     } else if (a.querySelector('.icon-search') || /search/i.test(`${a.getAttribute('href')} ${label}`)) {
       const search = createTag('a', { class: 'header-icon-btn header-search', href: authoredHref(a), 'aria-label': label });
       search.innerHTML = icon('search');
+      search.append(createTag('span', { class: 'header-action-label', 'aria-hidden': 'true' }, label));
       actions.append(search);
       searchLink = { label, href: authoredHref(a) };
     } else {
-      signIn = { label: getMetadata('login-label') || label, href: authoredHref(a) };
+      plainLinks.push(a);
     }
+  });
+  /* the last plain link is sign-in; any earlier ones are text utility links (e.g. a branch finder) */
+  const signInLink = plainLinks.pop();
+  if (signInLink) {
+    signIn = {
+      label: getMetadata('login-label') || signInLink.textContent.trim(),
+      href: authoredHref(signInLink),
+      icon: authoredIcon(signInLink) || 'user',
+    };
+  }
+  plainLinks.forEach((a) => {
+    const label = a.textContent.trim();
+    const util = createTag('a', { class: 'header-util-link', href: authoredHref(a) });
+    const name = authoredIcon(a);
+    if (name) util.innerHTML = icon(name);
+    util.append(createTag('span', { class: 'header-action-label' }, label));
+    const search = actions.querySelector('.header-search');
+    actions.insertBefore(util, search || null);
   });
   /* default layout shows the last authored CTA; the rail shows all of them */
   const shownCtas = rail ? ctas : ctas.slice(-1);
@@ -481,7 +516,7 @@ export default async function decorate(block) {
   if (signIn) {
     const a = createTag('a', { class: 'header-signin', href: signIn.href });
     authLinks.push(a);
-    a.innerHTML = icon('user');
+    a.innerHTML = icon(signIn.icon);
     a.append(createTag('span', { class: 'header-signin-label' }, signIn.label));
     actions.append(a);
   }
@@ -495,6 +530,7 @@ export default async function decorate(block) {
     'aria-label': labels.menu || 'Menu',
   });
   menuBtn.innerHTML = `${icon('menu')}${icon('close')}`;
+  menuBtn.append(createTag('span', { class: 'header-action-label', 'aria-hidden': 'true' }, labels.menu || 'Menu'));
   actions.append(menuBtn);
 
   inner.append(brand, nav);

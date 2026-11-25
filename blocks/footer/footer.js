@@ -9,6 +9,8 @@ const SOCIAL = [
   ['instagram', /instagram\.com$/],
   ['linkedin', /linkedin\.com$/],
   ['youtube', /(youtube\.com|youtu\.be)$/],
+  ['x', /^(x\.com|twitter\.com)$/],
+  ['facebook', /facebook\.com$/],
 ];
 
 const isExternal = (a) => /^https?:/.test(authoredHref(a));
@@ -111,6 +113,78 @@ function decorateLegal(block, sections) {
   block.append(inner);
 }
 
+/** Paragraph whose only content is linked images (e.g. app store badges). */
+const isBadgeRow = (p) => p.querySelector('img') && !p.textContent.trim();
+
+/**
+ * `footer-layout: columns`: link columns with a brand mark, social icons and badges,
+ * then a lighter band with legal copy and a regulator badge.
+ * Section 1: heading + list pairs become columns; an image paragraph is the brand mark.
+ * Section 2: a list of social profile links becomes icons; a paragraph of linked images
+ * becomes badges.
+ * Section 3: legal paragraphs (`{year}` is replaced); a paragraph with an image and text
+ * becomes a badge row.
+ * @param {Element} block
+ * @param {HTMLElement[]} sections
+ */
+function decorateColumns(block, sections) {
+  const [colsSec, extrasSec, legalSec] = sections;
+  const labels = sections.reduce((all, sec) => ({ ...all, ...readLabels(sec) }), {});
+  const top = createTag('div', { class: 'footer-inner footer-columns-top' });
+
+  const nav = createTag('nav', { class: 'footer-cols', 'aria-label': labels['footer-nav'] || 'Footer' });
+  colsSec?.querySelectorAll('h2, h3, h4').forEach((h) => {
+    const list = h.nextElementSibling?.matches('ul') ? h.nextElementSibling : null;
+    const col = createTag('div', { class: 'footer-col' }, createTag('h2', {}, h.textContent.trim()));
+    if (list) col.append(linkList(list));
+    nav.append(col);
+  });
+  top.append(nav);
+
+  const aside = createTag('div', { class: 'footer-columns-aside' });
+  const mark = colsSec?.querySelector(':scope > p picture, :scope > p img');
+  if (mark) {
+    const link = mark.closest('a');
+    const wrap = createTag(link ? 'a' : 'p', { class: 'footer-mark' });
+    if (link) wrap.setAttribute('href', authoredHref(link));
+    wrap.append(mark.closest('picture') || mark);
+    aside.append(wrap);
+  }
+  extrasSec?.querySelectorAll(':scope > ul').forEach((list) => {
+    const social = buildSocial(list);
+    if (social) aside.append(social);
+  });
+  extrasSec?.querySelectorAll(':scope > p').forEach((p) => {
+    if (!isBadgeRow(p)) return;
+    const badges = createTag('p', { class: 'footer-badges' });
+    p.querySelectorAll('a').forEach((a) => {
+      const img = a.querySelector('picture, img');
+      if (img) badges.append(createTag('a', { href: authoredHref(a), rel: 'noopener' }, img));
+    });
+    aside.append(badges);
+  });
+  top.append(aside);
+
+  const bottom = createTag('div', { class: 'footer-inner footer-columns-legal' });
+  legalSec?.querySelectorAll(':scope > p').forEach((p) => {
+    const img = p.querySelector('picture, img');
+    if (img && p.textContent.trim()) {
+      const row = createTag('div', { class: 'footer-regulator' });
+      row.append(img.closest('picture') || img);
+      const text = legalCopy(p);
+      text.querySelectorAll('picture, img').forEach((el) => el.remove());
+      row.append(text);
+      bottom.append(row);
+    } else {
+      bottom.append(legalCopy(p));
+    }
+  });
+
+  block.classList.add('surface-ink');
+  block.append(createTag('div', { class: 'footer-columns-main' }, top));
+  if (bottom.children.length) block.append(bottom);
+}
+
 /**
  * loads and decorates the footer
  * @param {Element} block The footer block element
@@ -124,6 +198,11 @@ export default async function decorate(block) {
   if (layout === 'legal') {
     block.textContent = '';
     decorateLegal(block, sections);
+    return;
+  }
+  if (layout === 'columns') {
+    block.textContent = '';
+    decorateColumns(block, sections);
     return;
   }
 

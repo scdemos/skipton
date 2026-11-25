@@ -497,6 +497,28 @@ header:has(> .header) {
   padding: 0.55em 1.15em;
 }
 
+/* text utility links (plain tool links before sign-in, e.g. a branch finder) */
+.header .header-util-link:any-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  min-height: 2.75rem;
+  padding-inline: 0.5em;
+  color: var(--color-text-strong);
+  font-size: var(--step-0);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.header .header-util-link .chrome-icon {
+  width: 1.2em;
+  height: 1.2em;
+}
+
+.header .header-icon-btn .header-action-label {
+  display: none;
+}
+
 /* market switcher (shared look with footer) */
 .header .chrome-market {
   position: relative;
@@ -965,6 +987,54 @@ body.nav-layout-rail {
    Layout: stacked (metadata `nav-layout: stacked`)
    row 1: logo + actions · row 2: primary nav spread across the bar
    ========================================================================== */
+
+/* below 1200px: icon-over-label actions (utility links, sign-in, menu) */
+.header.nav-layout-stacked .header-actions {
+  gap: var(--gap-s);
+}
+
+.header.nav-layout-stacked .header-search,
+.header.nav-layout-stacked .header-theme {
+  display: none;
+}
+
+.header.nav-layout-stacked .header-util-link:any-link,
+.header.nav-layout-stacked .header-signin:any-link,
+.header.nav-layout-stacked .header-menu {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--color-text-strong);
+  font-size: var(--step-n1);
+  font-weight: var(--weight-bold);
+  text-decoration: none;
+}
+
+.header.nav-layout-stacked .header-actions .chrome-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--color-accent-fill);
+}
+
+.header.nav-layout-stacked .header-action-label,
+.header.nav-layout-stacked .header-signin-label {
+  display: block;
+  text-decoration: underline 2px var(--color-accent-fill);
+  text-underline-offset: 0.35em;
+}
+
+.header.nav-layout-stacked .header-util-link:hover .header-action-label,
+.header.nav-layout-stacked .header-signin:hover .header-signin-label {
+  color: var(--color-link);
+}
+
 @media (width >= 1200px) {
   .header.nav-layout-stacked .header-inner {
     display: grid;
@@ -985,6 +1055,7 @@ body.nav-layout-rail {
   .header.nav-layout-stacked .header-actions {
     grid-area: 1 / 2;
     justify-self: end;
+    gap: var(--gap-m);
   }
 
   .header.nav-layout-stacked .header-nav {
@@ -997,7 +1068,8 @@ body.nav-layout-rail {
   }
 
   .header.nav-layout-stacked .header-nav-trigger {
-    padding-inline: 0.25rem;
+    padding-inline: 0;
+    color: var(--color-text-strong);
     font-size: var(--step-0);
     font-weight: var(--weight-bold);
   }
@@ -1006,15 +1078,59 @@ body.nav-layout-rail {
     display: none;
   }
 
+  .header.nav-layout-stacked .header-search,
+  .header.nav-layout-stacked .header-theme {
+    display: inline-flex;
+  }
+
+  .header.nav-layout-stacked .header-util-link:any-link,
+  .header.nav-layout-stacked .header-search {
+    flex-direction: row;
+    gap: 0.5rem;
+    width: auto;
+    padding: 0;
+    background: none;
+    font-size: var(--step-0);
+    font-weight: var(--weight-bold);
+    text-decoration: none;
+  }
+
+  .header.nav-layout-stacked .header-actions .chrome-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
   .header.nav-layout-stacked .header-signin:any-link {
-    border-color: var(--color-accent-fill);
+    flex-direction: row;
+    gap: 0.6rem;
+    min-height: 4.25rem;
+    padding: 0 2rem;
+    border-radius: var(--radius-pill);
     background: var(--color-accent-fill);
     color: var(--color-on-accent);
+    font-size: var(--step-0);
+  }
+
+  .header.nav-layout-stacked .header-signin .chrome-icon {
+    color: currentcolor;
+  }
+
+  .header.nav-layout-stacked .header-signin-label,
+  .header.nav-layout-stacked .header-menu .header-action-label {
+    display: none;
+  }
+
+  .header.nav-layout-stacked .header-signin .header-signin-label {
+    display: block;
+    text-decoration: none;
   }
 
   .header.nav-layout-stacked .header-signin:hover {
-    border-color: var(--color-accent-fill-hover);
     background: var(--color-accent-fill-hover);
+  }
+
+  .header.nav-layout-stacked .header-signin:hover .header-signin-label {
+    color: var(--color-on-accent);
   }
 }
 
