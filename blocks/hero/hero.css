@@ -31,6 +31,11 @@
   margin-bottom: 0;
 }
 
+/* a secondary heading after the hero h1 must be h2 (heading order) but reads as a subheading */
+.hero .hero-body h2 {
+  font-size: var(--step-2);
+}
+
 .hero .eyebrow {
   margin-bottom: var(--gap-s);
 }

@@ -1010,13 +1010,15 @@ main > .section .section-layout-column > .default-content-wrapper > :last-child 
   }
 }
 
+/* never upscale past the intrinsic size (blurry logos, image-size-responsive audit) */
 main > .section .default-content-wrapper picture img {
-  width: 100%;
+  width: auto;
   border-radius: var(--radius-l);
 }
 
 /* wide-section images are banners; a fixed ratio reserves space (no CLS) even without width/height */
 main > .section.wide .default-content-wrapper picture img {
+  width: 100%;
   aspect-ratio: 21 / 9;
   object-fit: cover;
 }
@@ -1037,6 +1039,7 @@ main > .section.cover > .default-content-wrapper > p:has(> picture) {
 }
 
 main > .section.cover .default-content-wrapper picture img {
+  width: 100%;
   aspect-ratio: 16 / 10;
   object-fit: cover;
   border-radius: var(--radius-m);

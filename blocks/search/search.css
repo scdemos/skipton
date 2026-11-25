@@ -200,7 +200,7 @@
   gap: var(--gap-xs);
 }
 
-.search .search-result-content h3 {
+.search .search-result-content h2 {
   margin: 0;
   font-size: var(--step-1);
   line-height: var(--leading-snug);
@@ -278,7 +278,7 @@
   padding-block: var(--gap-m);
 }
 
-.search .search-result.is-list:hover h3 {
+.search .search-result.is-list:hover h2 {
   color: var(--color-link-hover);
 }
 

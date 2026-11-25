@@ -167,7 +167,7 @@ function buildResultItem(row, view, filterGroups) {
     link.append(createTag('div', { class: 'search-result-strip' }));
   }
   const content = createTag('div', { class: 'search-result-content' });
-  content.append(createTag('h3', {}, row.title || href));
+  content.append(createTag('h2', {}, row.title || href));
   if (row.description) {
     content.append(createTag('p', { class: 'search-result-description' }, row.description));
   }
