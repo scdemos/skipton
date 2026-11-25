@@ -27,37 +27,37 @@
    * To re-theme for a customer, re-assign the values only; never rename them.
    * Keep the ink ramp dark and the stone ramp light so text contrast holds.
    */
-  --ink-1000: #07060d;
-  --ink-950: #0e0c1a;
-  --ink-900: #151325;
-  --ink-800: #211e36;
-  --ink-700: #322e4b;
-  --stone-600: #565b6b;
-  --stone-500: #7a7f8f;
-  --stone-400: #a3a7b4;
-  --stone-300: #d0d3dc;
-  --stone-200: #e6e8ee;
-  --stone-100: #f2f3f7;
-  --stone-50: #f8f9fb;
+  --ink-1000: #000;
+  --ink-950: #1e1f29;
+  --ink-900: #1e1f29;
+  --ink-800: #2b2d3a;
+  --ink-700: #575757;
+  --stone-600: #666;
+  --stone-500: #767676;
+  --stone-400: #999;
+  --stone-300: #d0d0d0;
+  --stone-200: #efefef;
+  --stone-100: #f6f6f9;
+  --stone-50: #fffefe;
   --white: #fff;
-  --flame-700: #b0240a;
-  --flame-600: #d6300d;
-  --flame-500: #ff4f1a;
-  --flame-400: #ff7a45;
-  --flame-100: #ffe8de;
-  --magenta-600: #c2185b;
-  --magenta-500: #ff2e7e;
-  --volt-400: #d6ff3d;
-  --aurora-600: #5b3fd9;
-  --aurora-500: #7c5cff;
-  --aurora-300: #b9a8ff;
-  --aurora-100: #efebff;
+  --flame-700: #0062a8;
+  --flame-600: #0062a8;
+  --flame-500: #017acd;
+  --flame-400: #017acd;
+  --flame-100: #eaf4fb;
+  --magenta-600: #66227d;
+  --magenta-500: #66227d;
+  --volt-400: #017acd;
+  --aurora-600: #3860be;
+  --aurora-500: #3860be;
+  --aurora-300: #9bb4df;
+  --aurora-100: #eef3fb;
   --mint-600: #12805a;
   --mint-100: #dcf5ea;
   --amber-600: #8a5a00;
   --amber-100: #fdf1d6;
-  --gradient-vivid: linear-gradient(120deg, var(--flame-500) 0%, var(--magenta-500) 50%, var(--aurora-500) 100%);
-  --brand-font-sans: montserrat, montserrat-fallback, system-ui, sans-serif;
+  --gradient-vivid: linear-gradient(120deg, var(--flame-500) 0%, var(--magenta-500) 100%);
+  --brand-font-sans: roboto, roboto-fallback, arial, sans-serif;
 
   /* BRAND TOKENS:end */
 
@@ -109,12 +109,12 @@
   --grid-gap-tight: clamp(0.75rem, 0.6rem + 0.6vw, 1.25rem);
 
   /* radii */
-  --radius-xs: 6px;
-  --radius-s: 10px;
-  --radius-m: 16px;
-  --radius-l: 24px;
-  --radius-xl: 36px;
-  --radius-pill: 999px;
+  --radius-xs: 0;
+  --radius-s: 0;
+  --radius-m: 0;
+  --radius-l: 0;
+  --radius-xl: 0;
+  --radius-pill: 0;
 
   /* borders, elevation, focus */
   --border-width: 1px;

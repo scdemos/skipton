@@ -1,10 +1,9 @@
 Demo Project - Cloud Adoption
 
 ## Environments
-- Preview: https://main--demo--scdemos.aem.page/
-- Live: https://main--demo--scdemos.aem.live/
-- CDN (production): https://demo.bbird.live/
-- Authoring (DA): https://da.live/#/scdemos/demo
+- Preview: https://main--skipton--scdemos.aem.page/
+- Live: https://main--skipton--scdemos.aem.live/
+- Authoring (DA): https://da.live/#/scdemos/skipton
 
 ## Create a customer demo (one command)
 
