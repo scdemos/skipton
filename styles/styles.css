@@ -513,7 +513,7 @@ button {
   align-items: center;
   gap: 0.6em;
   margin: 0 0 var(--gap-s);
-  color: var(--color-accent-text);
+  color: var(--color-text-strong);
   font-size: var(--step-n2);
   font-weight: var(--weight-bold);
   letter-spacing: var(--tracking-wide);
