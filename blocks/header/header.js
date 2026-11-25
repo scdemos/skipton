@@ -326,8 +326,17 @@ export default async function decorate(block) {
   const brandLink = brandSec?.querySelector('a');
   const brand = createTag('a', { class: 'header-brand', href: brandLink ? authoredHref(brandLink) : getMarket().root });
   if (labels.home) brand.setAttribute('aria-label', labels.home);
-  brand.innerHTML = LOGO_MARK;
-  brand.append(createTag('span', labels.home ? { 'aria-hidden': 'true' } : {}, brandLink?.textContent.trim() || 'Skipton Building Society'));
+  const brandText = brandLink?.textContent.trim() || 'Skipton Building Society';
+  if (!rail && brandSec?.querySelector('.icon-logo')) {
+    /* authored `:logo:` swaps the mark + text for the site's full logo */
+    if (!labels.home) brand.setAttribute('aria-label', brandText);
+    brand.append(createTag('img', {
+      class: 'header-logo-image', src: `${window.hlx.codeBasePath}/icons/logo.svg`, alt: '', width: 160, height: 36,
+    }));
+  } else {
+    brand.innerHTML = LOGO_MARK;
+    brand.append(createTag('span', labels.home ? { 'aria-hidden': 'true' } : {}, brandText));
+  }
   if (rail) {
     /* square brand mark above the rail: authored `:rail-mark:` icon, else the logo mark */
     const tile = createTag('span', { class: 'header-rail-mark', 'aria-hidden': 'true' });

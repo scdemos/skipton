@@ -104,6 +104,17 @@ header:has(> .header) {
   color: var(--color-text-strong);
 }
 
+/* authored `:logo:` in the nav brand cell: full logo from /icons/logo.svg */
+.header .header-logo-image {
+  display: block;
+  width: auto;
+  height: 2.25rem;
+}
+
+[data-theme='dark'] .header .header-logo-image {
+  filter: brightness(0) invert(1);
+}
+
 .header a:focus-visible,
 .header button:focus-visible,
 .header summary:focus-visible {
@@ -129,7 +140,7 @@ header:has(> .header) {
   align-items: center;
   gap: 0.35em;
   min-height: 2.75rem;
-  padding: 0.5rem 0.85rem;
+  padding: 0.5rem 0.7rem;
   border: 0;
   border-radius: var(--radius-pill);
   background: transparent;
@@ -137,6 +148,7 @@ header:has(> .header) {
   font: inherit;
   font-size: var(--step-n1);
   font-weight: var(--weight-semibold);
+  white-space: nowrap;
   cursor: pointer;
   transition: background-color var(--duration-1) var(--ease-out);
 }
