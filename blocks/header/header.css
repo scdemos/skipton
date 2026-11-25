@@ -1,4 +1,4 @@
-/* Frescopa global chrome: announce bar, header bar, mega navigation, mobile drawer */
+/* Global chrome: announce bar, header bar, mega navigation, mobile drawer */
 /* stylelint-disable no-descending-specificity -- component sections are ordered by UI area, not specificity */
 header:has(> .header) {
   position: sticky;

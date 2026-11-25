@@ -31,10 +31,10 @@ function getAbsoluteUrl(value) {
 function buildOrganizationSchema() {
   return {
     '@type': 'Organization',
-    name: 'Frescopa',
+    name: 'Skipton Building Society',
     url: window.location.origin,
     logo: `${window.location.origin}/icons/logo.svg`,
-    description: 'Frescopa brings products, services, experiences and membership together for customers in markets worldwide.',
+    description: 'We\'re here to help our members get more from their money, have a home and prepare for the future, with our range of savings, mortgages and financial advice.',
     sameAs: [],
   };
 }
@@ -85,7 +85,7 @@ function buildArticleSchema() {
 
   schema.publisher = {
     '@type': 'Organization',
-    name: 'Frescopa',
+    name: 'Skipton Building Society',
     logo: {
       '@type': 'ImageObject',
       url: `${window.location.origin}/icons/logo.svg`,
@@ -138,7 +138,7 @@ function buildEventSchema() {
 
   schema.organizer = {
     '@type': 'Organization',
-    name: 'Frescopa',
+    name: 'Skipton Building Society',
     url: window.location.origin,
   };
 

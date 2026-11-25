@@ -327,7 +327,7 @@ export default async function decorate(block) {
   const brand = createTag('a', { class: 'header-brand', href: brandLink ? authoredHref(brandLink) : getMarket().root });
   if (labels.home) brand.setAttribute('aria-label', labels.home);
   brand.innerHTML = LOGO_MARK;
-  brand.append(createTag('span', labels.home ? { 'aria-hidden': 'true' } : {}, brandLink?.textContent.trim() || 'Frescopa'));
+  brand.append(createTag('span', labels.home ? { 'aria-hidden': 'true' } : {}, brandLink?.textContent.trim() || 'Skipton Building Society'));
   if (rail) {
     /* square brand mark above the rail: authored `:rail-mark:` icon, else the logo mark */
     const tile = createTag('span', { class: 'header-rail-mark', 'aria-hidden': 'true' });

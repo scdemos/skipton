@@ -11,7 +11,7 @@
  */
 
 /* ==========================================================================
-   Frescopa design system
+   Skipton design system
    1. Brand primitives (swap this block to re-brand)
    2. Structural tokens (type, spacing, radii, motion)
    3. Semantic light/dark mappings
@@ -43,11 +43,11 @@
   --flame-700: #0062a8;
   --flame-600: #0062a8;
   --flame-500: #017acd;
-  --flame-400: #017acd;
+  --flame-400: #6ab8ee;
   --flame-100: #eaf4fb;
   --magenta-600: #66227d;
   --magenta-500: #66227d;
-  --volt-400: #017acd;
+  --volt-400: #6ab8ee;
   --aurora-600: #3860be;
   --aurora-500: #3860be;
   --aurora-300: #9bb4df;
@@ -56,7 +56,7 @@
   --mint-100: #dcf5ea;
   --amber-600: #8a5a00;
   --amber-100: #fdf1d6;
-  --gradient-vivid: linear-gradient(120deg, var(--flame-500) 0%, var(--magenta-500) 100%);
+  --gradient-vivid: linear-gradient(120deg, var(--flame-600) 0%, var(--flame-500) 100%);
   --brand-font-sans: roboto, roboto-fallback, arial, sans-serif;
 
   /* BRAND TOKENS:end */
@@ -114,7 +114,7 @@
   --radius-m: 0;
   --radius-l: 0;
   --radius-xl: 0;
-  --radius-pill: 0;
+  --radius-pill: 999px;
 
   /* borders, elevation, focus */
   --border-width: 1px;
@@ -158,7 +158,7 @@
   --color-accent-hover: var(--flame-700);
   --color-accent-fill: var(--flame-600);
   --color-accent-fill-hover: var(--flame-700);
-  --color-accent-glow: rgb(214 48 13 / 40%);
+  --color-accent-glow: rgb(0 98 168 / 30%);
   --color-on-accent: var(--white);
   --color-accent-soft: var(--flame-100);
   --color-accent-text: var(--flame-700);
@@ -199,19 +199,19 @@ main > .section.band,
   --color-surface-raised: var(--ink-800);
   --color-text: var(--stone-100);
   --color-text-strong: var(--white);
-  --color-text-muted: #b4b6c6;
-  --color-border: #2a2742;
-  --color-border-strong: #3e3a5c;
+  --color-text-muted: #c3c5d1;
+  --color-border: #34374a;
+  --color-border-strong: #4a4e66;
   --color-accent: var(--flame-400);
-  --color-accent-hover: #ff9466;
+  --color-accent-hover: #9dd0f5;
   --color-accent-fill: var(--flame-400);
-  --color-accent-fill-hover: #ff9466;
-  --color-accent-glow: rgb(255 122 69 / 35%);
+  --color-accent-fill-hover: #9dd0f5;
+  --color-accent-glow: rgb(106 184 238 / 30%);
   --color-on-accent: var(--ink-1000);
-  --color-accent-soft: #3b1a17;
+  --color-accent-soft: #10304a;
   --color-accent-text: var(--flame-400);
   --color-secondary: var(--aurora-300);
-  --color-secondary-soft: #251d4d;
+  --color-secondary-soft: #1d2a4d;
   --color-highlight: var(--volt-400);
   --color-focus: var(--volt-400);
   --color-success: #6fd6a6;
@@ -219,7 +219,7 @@ main > .section.band,
   --color-warning: #f1c35a;
   --color-warning-soft: #33280d;
   --color-danger: #ff8a7a;
-  --color-header: rgb(14 12 26 / 84%);
+  --color-header: rgb(30 31 41 / 92%);
   --color-shadow: rgb(0 0 0 / 30%);
   --color-shadow-strong: rgb(0 0 0 / 55%);
   --art-paper: var(--ink-800);
@@ -276,6 +276,26 @@ main > .section.flame,
   size-adjust: 113%;
   ascent-override: 85%;
   descent-override: 22%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: roboto-fallback;
+  font-weight: 100 500;
+  src: local('Arial'), local('ArialMT');
+  size-adjust: 99.5%;
+  ascent-override: 93%;
+  descent-override: 24%;
+  line-gap-override: 0%;
+}
+
+@font-face {
+  font-family: roboto-fallback;
+  font-weight: 600 900;
+  src: local('Arial Bold'), local('Arial-BoldMT');
+  size-adjust: 94%;
+  ascent-override: 98%;
+  descent-override: 26%;
   line-gap-override: 0%;
 }
 

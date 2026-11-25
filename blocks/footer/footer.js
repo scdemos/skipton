@@ -75,7 +75,7 @@ function decorateLegal(block, sections) {
   const brand = createTag(brandLink ? 'a' : 'p', { class: 'footer-legal-brand' });
   if (brandLink) brand.setAttribute('href', authoredHref(brandLink));
   brand.innerHTML = LOGO_MARK;
-  brand.append(createTag('span', {}, brandLink?.textContent.trim() || 'Frescopa'));
+  brand.append(createTag('span', {}, brandLink?.textContent.trim() || 'Skipton Building Society'));
   row.append(brand);
   const rowList = rowSec?.querySelector('ul');
   if (rowList) {

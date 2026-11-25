@@ -1,4 +1,4 @@
-/* Frescopa global footer (always ink) */
+/* Global footer (always ink) */
 /* stylelint-disable no-descending-specificity -- component sections are ordered by UI area, not specificity */
 footer .footer {
   min-height: 20rem;
