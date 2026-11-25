@@ -42,7 +42,7 @@ header:has(> .header) {
 }
 
 .header .header-announce strong {
-  color: var(--flame-400);
+  color: var(--white);
   font-weight: var(--weight-black);
 }
 
