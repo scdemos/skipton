@@ -67,7 +67,22 @@
     "tags": "lists render as pill clouds (browse by tag/category/author, all tags)",
     "page-title": "plain title band: optional icon paragraph above the H1 (simple landing pages: contact, search, insights hub)",
     "social": "links rendered as raised cards (Stay connected)",
-    "head-row": "heading left, lone link paragraph right (e.g. \"Latest news\" ... \"All news\")"
+    "head-row": "heading left, lone link paragraph right (e.g. \"Latest news\" ... \"All news\")",
+    "panel": {
+      "level": 2,
+      "baseCandidate": true,
+      "use": "contained gradient band (--gradient-band) with the signature radius and an offset accent shadow; combine with center"
+    },
+    "cta-row": {
+      "level": 2,
+      "baseCandidate": true,
+      "use": "with panel: compact band, text left and button right from 900px"
+    },
+    "aside-media": {
+      "level": 2,
+      "baseCandidate": true,
+      "use": "lead copy left, a small badge/image (p > picture) right from 900px; image capped at 9rem high"
+    }
   },
   "blocks": {
     "hero": {
@@ -75,9 +90,10 @@
         "home",
         "ink",
         "no-image",
-        "banner"
+        "banner",
+        "panel"
       ],
-      "use": "page-top hero: text with one picture (or a light + dark pair). home = flagship first viewport; ink = dark; no-image = text only; banner = full-bleed photo behind a dark gradient, white text (corporate/FS sites)"
+      "use": "page-top hero: text with one picture (or a light + dark pair). home = flagship first viewport; ink = dark; no-image = text only; banner = full-bleed photo behind a dark gradient, white text (corporate/FS sites); panel = contained primary panel joined to the image, asymmetric signature radius, serif title"
     },
     "cards": {
       "variants": [
@@ -98,9 +114,12 @@
         "promo",
         "promo ink",
         "promo wide",
-        "logos"
+        "logos",
+        "soft",
+        "product"
       ],
-      "use": "default = image grid; links = cards for authored page links (title, image, description from the query index); tiles = icon tiles; stories = lead story + grid; cover = one wide feature card; tiers = one row per plan with an optional badge line; bento = mixed-size grid; panel = one raised panel with hairline-separated cells (capabilities, ESG, news; with or without images); cols-2 / cols-4 set the columns; emphasis = larger headings (contact cards); text = text-only tiles; list = rows with date/title/author byline (paragraph with headshot picture) + thumbnail; switchable adds a grid/list toggle (JS); stats = big figures; promo = image + text feature tile (ink = dark, wide = one per row); logos = partner/membership logo wall"
+      "use": "default = image grid; links = cards for authored page links (title, image, description from the query index); tiles = icon tiles; stories = lead story + grid; cover = one wide feature card; tiers = one row per plan with an optional badge line; bento = mixed-size grid; panel = one raised panel with hairline-separated cells (capabilities, ESG, news; with or without images); cols-2 / cols-4 set the columns; emphasis = larger headings (contact cards); text = text-only tiles; list = rows with date/title/author byline (paragraph with headshot picture) + thumbnail; switchable adds a grid/list toggle (JS); stats = big figures; promo = image + text feature tile (ink = dark, wide = one per row); logos = partner/membership logo wall; soft = cream surface cards, no border/shadow (help/contact tiles); product = one product row: title | rate box (h3 + p with strong) | bullet list",
+      "baseCandidate": true
     },
     "columns": {
       "variants": [
@@ -118,7 +137,7 @@
     },
     "faq": {
       "variants": [],
-      "use": "INDEX-DRIVEN: rows are category names, Q&A come from /faq-index.json. For authored Q&A use tabs instead."
+      "use": "INDEX-DRIVEN: rows are category names, Q&A come from /faq-index.json. For authored Q&A use tabs instead.; items render as rounded cards"
     },
     "table": {
       "variants": [
@@ -328,6 +347,11 @@
     "login-label / logout-label": {
       "level": 0,
       "use": "metadata overrides for auth link text"
+    },
+    "header nav-layout: stacked": {
+      "level": 6,
+      "baseCandidate": true,
+      "use": "two-row desktop header (≥1200px): logo + actions (search, theme, filled login pill) on row 1, bold primary nav spread full width on row 2; header height via :root:has(meta[name=nav-layout]) so no CLS"
     }
   },
   "baseContentMarkers": {

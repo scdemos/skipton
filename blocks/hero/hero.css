@@ -545,3 +545,55 @@ main > .section > .hero-wrapper:has(> .hero.banner) {
     min-height: 35rem;
   }
 }
+
+/* ---------- Panel: brand-blue text panel joined to the artwork ---------- */
+.hero.panel {
+  --hero-bg: transparent;
+
+  padding-block: var(--gap-m) 0;
+  border-image: none;
+}
+
+.hero.panel .hero-inner {
+  gap: 0;
+  overflow: hidden;
+  border-radius: var(--radius-s) var(--radius-s) 74px;
+  background: var(--flame-600);
+  align-items: stretch;
+}
+
+.hero.panel .hero-content {
+  padding: clamp(var(--gap-m), 3.2vw, 2.875rem);
+  align-content: center;
+  color: var(--color-text);
+}
+
+.hero.panel .hero-title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+}
+
+.hero.panel .hero-art {
+  height: 100%;
+  border-radius: 0;
+}
+
+.hero.panel .hero-art img {
+  max-height: none;
+}
+
+@media (width >= 900px) {
+  .hero.panel .hero-inner {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .hero.panel.no-image .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero.panel.no-image .hero-content {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--gap-m);
+  }
+}

@@ -1,9 +1,8 @@
 /* FAQ: accessible accordion (button + region) */
 .faq {
-  max-width: var(--container-narrow);
+  max-width: var(--container);
 }
 
-.faq .faq-list,
 .faq .faq-category {
   border-top: var(--border);
 }
@@ -22,7 +21,12 @@
 }
 
 .faq .faq-item {
-  border-bottom: var(--border);
+  margin-bottom: var(--gap-s);
+  padding-inline: var(--gap-m);
+  border: var(--border-width) solid var(--color-card-border, rgb(99 102 135 / 50%));
+  border-radius: var(--radius-l);
+  background: var(--color-surface);
+  box-shadow: 0 0 5px var(--color-card-shadow, rgb(30 31 41 / 25%));
 }
 
 .faq .faq-heading {
@@ -115,3 +119,4 @@
 .faq .faq-empty {
   color: var(--color-text-muted);
 }
+

@@ -40,7 +40,7 @@
   --stone-100: #f6f6f9;
   --stone-50: #fffefe;
   --white: #fff;
-  --flame-700: #0062a8;
+  --flame-700: #004e86;
   --flame-600: #0062a8;
   --flame-500: #017acd;
   --flame-400: #6ab8ee;
@@ -57,6 +57,11 @@
   --amber-600: #8a5a00;
   --amber-100: #fdf1d6;
   --gradient-vivid: linear-gradient(120deg, var(--flame-600) 0%, var(--flame-500) 100%);
+  --gradient-band: linear-gradient(90deg, #004e86 0%, #0062a8 50%, #1971b1 100%);
+  --cream-100: #faf6f3;
+  --sky-300: #8ae8ff;
+  --brand-font-serif: 'EB Garamond', georgia, serif;
+  --radius-signature: 25px 25px 74px;
   --brand-font-sans: roboto, roboto-fallback, arial, sans-serif;
 
   /* BRAND TOKENS:end */
@@ -64,15 +69,16 @@
   /* ---- 2. Structural tokens ---- */
   --font-sans: var(--brand-font-sans);
   --font-display: var(--font-sans);
+  --font-serif: var(--brand-font-serif);
   --font-mono: 'JetBrains Mono', jetbrains-mono-fallback, ui-monospace, menlo, consolas, monospace;
   --weight-regular: 400;
   --weight-medium: 500;
   --weight-semibold: 600;
   --weight-bold: 700;
-  --weight-black: 800;
+  --weight-black: 900;
   --leading-tight: 1.05;
   --leading-snug: 1.2;
-  --leading-body: 1.6;
+  --leading-body: 1.5;
   --tracking-tight: -0.035em;
   --tracking-snug: -0.02em;
   --tracking-wide: 0.14em;
@@ -80,13 +86,13 @@
   /* fluid type scale (360px → 1440px) */
   --step-n2: clamp(0.75rem, 0.73rem + 0.08vw, 0.8rem);
   --step-n1: clamp(0.84rem, 0.82rem + 0.1vw, 0.9rem);
-  --step-0: clamp(1rem, 0.97rem + 0.14vw, 1.0625rem);
-  --step-1: clamp(1.125rem, 1.08rem + 0.25vw, 1.3rem);
-  --step-2: clamp(1.3rem, 1.2rem + 0.45vw, 1.65rem);
-  --step-3: clamp(1.55rem, 1.36rem + 0.85vw, 2.15rem);
-  --step-4: clamp(1.9rem, 1.55rem + 1.55vw, 2.9rem);
-  --step-5: clamp(2.3rem, 1.75rem + 2.5vw, 3.9rem);
-  --step-6: clamp(2.7rem, 1.9rem + 3.6vw, 5rem);
+  --step-0: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --step-1: clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);
+  --step-2: clamp(1.3rem, 1.2rem + 0.45vw, 1.5625rem);
+  --step-3: clamp(1.55rem, 1.36rem + 0.85vw, 1.875rem);
+  --step-4: clamp(1.75rem, 1.5rem + 1vw, 2.1875rem);
+  --step-5: clamp(2.1rem, 1.8rem + 1.2vw, 2.5625rem);
+  --step-6: clamp(2.4rem, 1.9rem + 2vw, 3.25rem);
 
   /* fluid spacing (new code uses --gap-*; legacy --space-* kept below) */
   --gap-3xs: 0.25rem;
@@ -102,18 +108,18 @@
   /* containers & grid */
   --container-prose: 44rem;
   --container-narrow: 60rem;
-  --container: 80rem;
-  --container-wide: 92rem;
-  --gutter: clamp(1rem, 0.5rem + 2.5vw, 3rem);
+  --container: 86.875rem;
+  --container-wide: 90rem;
+  --gutter: clamp(1rem, 0.75rem + 0.8vw, 1.5625rem);
   --grid-gap: clamp(1rem, 0.75rem + 1.2vw, 2rem);
   --grid-gap-tight: clamp(0.75rem, 0.6rem + 0.6vw, 1.25rem);
 
   /* radii */
-  --radius-xs: 0;
-  --radius-s: 0;
-  --radius-m: 0;
-  --radius-l: 0;
-  --radius-xl: 0;
+  --radius-xs: 4px;
+  --radius-s: 9px;
+  --radius-m: 16px;
+  --radius-l: 25px;
+  --radius-xl: 25px;
   --radius-pill: 999px;
 
   /* borders, elevation, focus */
@@ -147,7 +153,7 @@
 
   --color-bg: var(--white);
   --color-surface: var(--white);
-  --color-surface-sunken: var(--stone-50);
+  --color-surface-sunken: var(--cream-100);
   --color-surface-raised: var(--white);
   --color-text: var(--ink-900);
   --color-text-strong: var(--ink-1000);
@@ -232,6 +238,8 @@ main > .section.band,
 
 /* flame band: white on solid flame-600 (>= 4.5:1) */
 main > .section.flame,
+main > .section.panel > .default-content-wrapper,
+.hero.panel .hero-content,
 .surface-flame {
   --color-text: var(--white);
   --color-text-strong: var(--white);
@@ -364,6 +372,13 @@ header {
   height: var(--chrome-h);
 }
 
+/* `nav-layout: stacked` reserves the taller two-row bar before the header loads (no CLS) */
+@media (width >= 1200px) {
+  :root:has(meta[name='nav-layout'][content='stacked']) {
+    --header-h: 9.5rem;
+  }
+}
+
 header .header,
 footer .footer {
   visibility: hidden;
@@ -391,20 +406,25 @@ h6 {
 }
 
 h1 {
+  font-family: var(--font-serif);
   font-size: var(--step-5);
-  font-weight: var(--weight-black);
-  line-height: var(--leading-tight);
-  letter-spacing: var(--tracking-tight);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-snug);
+  letter-spacing: 0;
 }
 
 h2 {
   font-size: var(--step-4);
   font-weight: var(--weight-black);
-  line-height: 1.1;
-  letter-spacing: var(--tracking-tight);
+  line-height: 1.25;
+  letter-spacing: 0;
 }
 
-h3 { font-size: var(--step-2); }
+h3 {
+  font-size: var(--step-2);
+  font-weight: var(--weight-black);
+  letter-spacing: 0;
+}
 h4 { font-size: var(--step-1); }
 
 h5,
@@ -619,19 +639,21 @@ button.button.primary,
 button.button.secondary {
   --btn-bg: var(--color-accent-fill);
   --btn-fg: var(--color-on-accent);
-  --btn-border: transparent;
+  --btn-border: var(--btn-bg);
 
   justify-content: center;
   gap: 0.55em;
   min-height: 3rem;
-  padding: 0.75em 1.5em;
-  border: 1.5px solid var(--btn-border);
+  padding: 0.87em 1.39em;
+  border: 5px solid var(--btn-border);
   border-radius: var(--radius-pill);
   background: var(--btn-bg);
   color: var(--btn-fg);
-  font-size: var(--step-n1);
-  letter-spacing: 0.01em;
-  line-height: 1.1;
+  font-size: var(--step-0);
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
   white-space: nowrap;
   transition:
     background-color var(--duration-1) var(--ease-out),
@@ -640,21 +662,16 @@ button.button.secondary {
     transform var(--duration-2) var(--ease-out);
 }
 
-a.button.primary:any-link,
-button.button.primary {
-  box-shadow: 0 8px 20px -14px var(--color-accent-glow);
-}
-
 a.button.primary:any-link::after,
 button.button.primary::after {
-  color: inherit;
+  content: none;
 }
 
 a.button.secondary:any-link,
 button.button.secondary {
   --btn-bg: transparent;
   --btn-fg: var(--color-text-strong);
-  --btn-border: var(--color-border-strong);
+  --btn-border: var(--color-accent-fill);
 }
 
 a.button.secondary:any-link::after,
@@ -667,7 +684,7 @@ button.button.primary:hover {
   --btn-bg: var(--color-accent-fill-hover);
 
   color: var(--btn-fg);
-  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 a.button.secondary:any-link:hover,
@@ -675,7 +692,7 @@ button.button.secondary:hover {
   --btn-border: var(--color-text-strong);
 
   color: var(--btn-fg);
-  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 a.button[aria-disabled='true'],
@@ -742,6 +759,46 @@ main > .section > div {
 
 main > .section > div + div {
   margin-top: var(--gap-xl);
+}
+
+/* panel: contained gradient band with the signature corner; cards inside stay light */
+main > .section.panel {
+  padding-block: var(--gap-xl);
+  width: min(100% - 2 * var(--gutter), var(--container));
+  margin: var(--gap-xl) auto calc(var(--gap-xl) + 14px);
+  padding-inline: clamp(var(--gap-m), 3vw, 2.875rem);
+  border-radius: var(--radius-signature);
+  background: var(--gradient-band);
+  box-shadow: 0 14px 0 0 var(--sky-300);
+}
+
+main > .section.panel > div {
+  width: auto;
+}
+
+main > .section.panel.cta-row {
+  border-radius: var(--radius-l);
+  box-shadow: none;
+}
+
+@media (width >= 900px) {
+  main > .section.panel.cta-row > .default-content-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-s) var(--gap-xl);
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  main > .section.panel.cta-row > .default-content-wrapper > :is(h2, h3, p:not(.button-container)) {
+    flex: 1 1 60%;
+    margin: 0;
+  }
+
+  main > .section.panel.cta-row > .default-content-wrapper > :is(.button-container, .button-group) {
+    flex: 0 0 auto;
+    margin: 0;
+  }
 }
 
 main > .section.tight {
@@ -983,6 +1040,29 @@ main > .section.cover .default-content-wrapper picture img {
   aspect-ratio: 16 / 10;
   object-fit: cover;
   border-radius: var(--radius-m);
+}
+
+/* aside-media: lead copy left, a small badge/image right */
+@media (width >= 900px) {
+  main > .section.aside-media > .default-content-wrapper:first-child:has(> p > picture) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--gap-s) var(--gap-2xl);
+  }
+
+  main > .section.aside-media > .default-content-wrapper:first-child > * {
+    grid-column: 1;
+  }
+
+  main > .section.aside-media > .default-content-wrapper:first-child > p:has(> picture) {
+    grid-area: 1 / 2 / span 4;
+    align-self: center;
+  }
+}
+
+main > .section.aside-media > .default-content-wrapper:first-child > p:has(> picture) img {
+  width: auto;
+  max-height: 9rem;
 }
 
 main > .section.cover > .default-content-wrapper > :not(:has(> picture)) {
