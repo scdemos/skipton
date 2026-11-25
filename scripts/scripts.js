@@ -801,8 +801,9 @@ function initSidekick() {
 function loadDelayed() {
   window.setTimeout(() => {
     // consent banner; martech and other consent-dependent code load from consented.js
-    if (!IS_EDITOR) import('./consent-check.js');
-    import('./delayed.js');
+    // content blockers (uBlock filters block first-party /scripts/delayed.js) must not throw
+    if (!IS_EDITOR) import('./consent-check.js').catch(() => {});
+    import('./delayed.js').catch(() => {});
   }, 3000);
 }
 
