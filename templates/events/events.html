@@ -1,0 +1,95 @@
+<head>
+  <title>{{title}} | Frescopa</title>
+  <meta name="description" content="{{summary}}">
+  <meta name="date" content="{{date}}">
+  <meta name="keywords" content="events, {{type}}, {{city}}, Experiences">
+  <meta name="template" content="events">
+  <meta name="image" content="https://main--demo--scdemos.aem.live{{image}}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [{
+      "@type": "Event",
+      "name": "{{title}}",
+      "description": "{{summary}}",
+      "startDate": "{{date}}",
+      "eventStatus": "https://schema.org/EventScheduled",
+      {{#online}}
+      "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+      "location": {
+        "@type": "VirtualLocation",
+        "name": "{{house}}"
+      },
+      {{/online}}
+      {{^online}}
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "{{house}}",
+        "address": "{{street}}, {{cityLine}}"
+      },
+      {{/online}}
+      "organizer": {
+        "@type": "Organization",
+        "name": "Frescopa",
+        "url": "https://demo.bbird.live"
+      }
+    }]
+  }
+  </script>
+</head>
+<body>
+  <header></header>
+  <main>
+    <div>
+      <div class="hero">
+        <div>
+          <div>
+            <picture>
+              <img src="https://main--demo--scdemos.aem.live{{image}}" alt="">
+            </picture>
+          </div>
+        </div>
+        <div>
+          <div>
+            <p>{{#type}}{{type}} · {{/type}}{{city}}</p>
+            <h1>{{title}}</h1>
+            <p>{{summary}}</p>
+            {{#ctaUrl}}<p><strong><a href="{{ctaUrl}}">{{cta}}</a></strong></p>{{/ctaUrl}}
+            <p><em><a href="/en/experiences#upcoming-events">All events</a></em></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="columns">
+        <div>
+          <div>
+            <h2>About this event</h2>
+            {{#details}}<p>{{details}}</p>{{/details}}
+            <p>Date: {{date}}</p>
+            {{#time}}<p>Time: {{time}}</p>{{/time}}
+            {{#type}}<p>Type: {{type}}</p>{{/type}}
+          </div>
+          <div>
+            <h2>Where</h2>
+            <p><strong>{{house}}</strong></p>
+            <p>{{street}}<br>{{cityLine}}</p>
+            {{#price}}<p>{{price}}</p>{{/price}}
+            {{#ctaUrl}}<p><a href="{{ctaUrl}}">{{cta}}</a></p>{{/ctaUrl}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h2>More events</h2>
+      <div class="related-articles">
+        <div>
+          <div>keywords</div>
+          <div>events</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer></footer>
+</body>
